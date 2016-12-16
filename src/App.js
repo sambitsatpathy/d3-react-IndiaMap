@@ -54,7 +54,7 @@ const App = ({indiaData,populationData})=>{
             {
               topojson.feature(indiaData, indiaData.objects.india)
               .features
-              .map((d,i)=> <path fill={states[i] ? colours(populationData[states[i]]): "black" } className={states[i]} key={i} d={path(d)}></path>)
+              .map((d,i)=> <path fill={populationData[states[i]] ? colours(populationData[states[i]]) : "silver" } className={states[i]} key={i} d={path(d)}></path>)
             }
           </g>
         </svg>
@@ -62,7 +62,7 @@ const App = ({indiaData,populationData})=>{
     );
 }
 App.propTypes={
-  indiaData:PropTypes.array,
-  populationData:PropTypes.array,
+  indiaData:PropTypes.object,
+  populationData:PropTypes.object,
 }
 export default App;
