@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React,{PropTypes} from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import './App.css';
@@ -34,32 +34,35 @@ const states={
           51:"SK",
           52:"TN",
           53:"TR",
-          54:"UT",
-          55:"UP",
+          54:"UP",
+          55:"UT",
           56:"WB",
         };
-class App extends Component {
-  render() {
+const App = ({indiaData,populationData})=>{
     const projection = d3.geoMercator()
                       .scale(1000)
                       .translate([-1100, 700]),
           path = d3.geoPath(projection),
-          {india}= this.props,
-          colours = ["#63FF9B", "#63FF6B", "#7BFF63", "#BBFF63", "#DBFF63", "#FBFF63","#FFD363", "#FFB363", "#FF8363", "#FF7363", "#FF6364"],
-          heatmapColour = d3.scaleLinear()
-                        .domain(d3.range(0, 10, 1.0 / (colours.length - 1)))
-                        .range(colours),
-          c = d3.scaleLinear().domain([0,45]).range([0,1]);
+          popData=Object.keys(populationData).map((d)=>populationData[d]),
+          colours = d3.scaleLinear()
+                    .domain([Math.min(...popData),Math.max(...popData)])
+                    .range(["#BBFF63","#FFB363"]);
     return (
       <div className="App">
         <svg width={600} height={600} >
           <g>
-            {topojson.feature(india, india.objects.india).features.map((d,i)=> <path fill={heatmapColour(c(i))} className={states[i]} key={i} d={path(d)}></path>)}
+            {
+              topojson.feature(indiaData, indiaData.objects.india)
+              .features
+              .map((d,i)=> <path fill={states[i] ? colours(populationData[states[i]]): "black" } className={states[i]} key={i} d={path(d)}></path>)
+            }
           </g>
         </svg>
       </div>
     );
-  }
 }
-
+App.propTypes={
+  indiaData:PropTypes.array,
+  populationData:PropTypes.array,
+}
 export default App;
