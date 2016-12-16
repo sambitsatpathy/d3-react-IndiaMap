@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
-function renderMap(){
+function renderMap(indiaData,populationData){
   let randomPopData={};
   Object.keys(populationData.states).forEach((d)=>{
     if(Math.floor(Math.random() * 2) === 0){
@@ -19,9 +19,9 @@ function renderMap(){
 
 d3.json("data/india-states.json", (error, indiaData)=>{
   d3.json("data/populationData.json", (error, populationData)=>{
-    renderMap();
+    renderMap(indiaData,populationData);
     setInterval(()=>{
-      renderMap()
+      renderMap(indiaData,populationData)
     },2000);
   });
 });
