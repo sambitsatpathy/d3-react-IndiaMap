@@ -1,27 +1,14 @@
 import React from 'react';
-import * as d3 from 'd3';
+import request from './request';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
-function renderMap(indiaData,populationData){
-  let randomPopData={};
-  Object.keys(populationData.states).forEach((d)=>{
-    if(Math.floor(Math.random() * 2) === 0){
-      randomPopData[d]=populationData.states[d];
-    }
-  });
+(async function(){
+  let indiaTopoJSON = await request('./data/india-states.json'),
+      earthquakeZones = await request('./data/earthquakeZones.json');
   ReactDOM.render(
-    <App indiaData={indiaData} populationData={randomPopData}/>,
-    document.getElementById('root')
+      <App indiaTopoJSON={indiaTopoJSON} earthquakeZones={earthquakeZones.states}/>,
+        document.getElementById('root')
   );
-}
-
-d3.json("data/india-states.json", (error, indiaData)=>{
-  d3.json("data/populationData.json", (error, populationData)=>{
-    renderMap(indiaData,populationData);
-    setInterval(()=>{
-      renderMap(indiaData,populationData)
-    },2000);
-  });
-});
+})();
