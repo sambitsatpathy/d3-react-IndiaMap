@@ -1,0 +1,36 @@
+{
+  "currentQuakes":[{
+    "city":"Bhubaneswar",
+    "long":85.8245,
+    "lat":20.2961,
+    "magnitude":"smallQuake"
+  },
+  {
+    "city":"Shillong",
+    "long":91.53,
+    "lat":25.34,
+    "magnitude":"mediumQuake"
+  },
+  {
+    "city":"Surat",
+    "long":72.50,
+    "lat":21.10,
+    "magnitude":"smallQuake"
+  },{
+    "city":"Agartala",
+    "long":91.16,
+    "lat":23.50,
+    "magnitude":"largeQuake"
+  },{
+    "city":"Amritsar",
+    "long":74.52,
+    "lat":31.38,
+    "magnitude":"smallQuake"
+  },
+  {
+    "city":"Port Blair",
+    "long":92.72,
+    "lat":11.62,
+    "magnitude":"mediumQuake"
+  }]
+}
