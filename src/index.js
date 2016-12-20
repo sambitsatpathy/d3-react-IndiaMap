@@ -5,8 +5,7 @@ import App from './App';
 import './index.css';
 
 (async function(){
-  let indiaTopoJSON = await request('./data/india-states.json'),
-      earthquakeZones = await request('./data/earthquakeZones.json');
+  let [indiaTopoJSON,earthquakeZones] = await Promise.all([request('./data/india-states.json'),request('./data/earthquakeZones.json')]);
   ReactDOM.render(
       <App indiaTopoJSON={indiaTopoJSON} earthquakeZones={earthquakeZones.states}/>,
         document.getElementById('root')
